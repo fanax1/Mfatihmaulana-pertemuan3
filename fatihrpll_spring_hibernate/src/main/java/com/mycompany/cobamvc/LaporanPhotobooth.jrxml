@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.5.final using JasperReports Library version 6.21.5-74d586df47b25dbd05bd0957999819196e59934a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LaporanPhotobooth" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="329e3649-ee56-4779-9a98-922ca722110d">
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+            kode_sesi,
+            COALESCE(NULLIF(email, ''), '-') AS email,
+            nama_template,
+            jumlah_cetakan,
+            DATE_FORMAT(waktu_sesi, '%d-%m-%Y %H:%i') AS waktu_sesi,
+            total_biaya
+        FROM transaksi_sesi
+        ORDER BY id DESC]]>
+	</queryString>
+	<field name="kode_sesi" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="nama_template" class="java.lang.String"/>
+	<field name="jumlah_cetakan" class="java.lang.Integer"/>
+	<field name="waktu_sesi" class="java.lang.String"/>
+	<field name="total_biaya" class="java.lang.Integer"/>
+	<variable name="TOTAL_PENDAPATAN" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_biaya}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="75" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="5" width="555" height="28" uuid="2a10e2af-6a0d-4716-a86f-8641f3c3ee71"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN TRANSAKSI SELF-PHOTO BOOTH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="33" width="555" height="20" uuid="8b6a9620-b090-4d55-9acd-7face262d3a4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Rekapitulasi Sesi Foto, Penggunaan Template, dan Pendapatan Studio]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="62" width="555" height="1" uuid="fe761ba6-5c8a-425b-8aa4-dbd1861804cd"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="25" splitType="Stretch">
+			<textField pattern="dd MMMMM yyyy HH:mm">
+				<reportElement x="380" y="0" width="175" height="20" uuid="0078c123-bd0a-4715-bcf9-72e4a132fcbf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dicetak: " + new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="75" height="30" forecolor="#FFFFFF" backcolor="#2C3E50" uuid="4d8ea7cb-096b-485b-b74f-40b4e06101c0"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kode Sesi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="75" y="0" width="115" height="30" forecolor="#FFFFFF" backcolor="#2C3E50" uuid="ab81b1aa-b76c-4519-a768-903e145a3e4c"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="190" y="0" width="120" height="30" forecolor="#FFFFFF" backcolor="#2C3E50" uuid="db574289-772b-4878-b0ac-0b0a234d9816"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Template Bingkai]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="310" y="0" width="60" height="30" forecolor="#FFFFFF" backcolor="#2C3E50" uuid="f1234567-89ab-4cde-8123-456789abcdef"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jml Cetak]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="370" y="0" width="95" height="30" forecolor="#FFFFFF" backcolor="#2C3E50" uuid="d5416618-3681-4242-8284-382bb4f38ba2"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Waktu Sesi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="465" y="0" width="90" height="30" forecolor="#FFFFFF" backcolor="#2C3E50" uuid="901c8ce5-3639-4f40-a4c9-5fd67eba85ab"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Biaya (Rp)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="75" height="25" uuid="4999fd08-b2b6-4a94-a1ca-e051953b71a4"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kode_sesi}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="75" y="0" width="115" height="25" uuid="c2599757-a2eb-43fd-9c46-1aa98eb2fad0"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="190" y="0" width="120" height="25" uuid="877e652c-3989-40b0-9bff-d36cf9d9bdcd"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_template}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="310" y="0" width="60" height="25" uuid="a1b2c3d4-e5f6-4789-8012-3456789abcde"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jumlah_cetakan}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="370" y="0" width="95" height="25" uuid="7c0385cd-3829-4d9c-aaa4-d200f2e40d27"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{waktu_sesi}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="465" y="0" width="90" height="25" uuid="baedab5d-2b1a-4e04-b4a6-ea835b531666"/>
+				<box rightPadding="5">
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_biaya}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="5" width="80" height="20" uuid="d75c6634-0a14-4c17-ad93-89431bce5da3"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER} + " dari"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="5" width="40" height="20" uuid="64854998-8070-4f2c-b8e1-89c976e92593"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="465" height="30" backcolor="#ECF0F1" uuid="169ccdd0-90d9-44b8-9025-0f01efe975a5"/>
+				<box rightPadding="10">
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL PENDAPATAN KESELURUHAN (Rp)]]></text>
+			</staticText>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="465" y="0" width="90" height="30" backcolor="#ECF0F1" uuid="c69deee9-8bad-4937-8b7b-93a6693cd61c"/>
+				<box rightPadding="5">
+					<pen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_PENDAPATAN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
